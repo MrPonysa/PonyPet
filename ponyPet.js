@@ -10,16 +10,27 @@ function pet() {
     currentPonyState.pet();
     changePonyTo(currentPonyState.id);
 }
-
+function eye() {
+    currentPonyState.eye();
+    changePonyTo(currentPonyState.id);
+}
+function boop() {
+    currentPonyState.boop();
+    changePonyTo(currentPonyState.id);
+}
+function mouth() {
+    currentPonyState.mouth();
+    changePonyTo(currentPonyState.id);
+}
 window.onload = function () {
     function ponyStateFactory(id, pet, eye, boop, mouth) {
         return {
             id: id,
-            pet: function () { currentPonyState = ponyStates[pet - 1] },
-            eye: function () { currentPonyState = ponyStates[eye - 1] },
-            boop: function () { currentPonyState = ponyStates[boop - 1] },
-            mouth: function () { currentPonyState = ponyStates[mouth - 1] }
-        }
+            pet: function () { currentPonyState = ponyStates[pet - 1]; },
+            eye: function () { currentPonyState = ponyStates[eye - 1]; },
+            boop: function () { currentPonyState = ponyStates[boop - 1]; },
+            mouth: function () { currentPonyState = ponyStates[mouth - 1]; }
+        };
     }
 
     ponyStates.push(ponyStateFactory(1, 1, 6, 3, 13));
@@ -52,4 +63,4 @@ window.onload = function () {
     ponyImg = document.getElementById('ponyImg');
 
     changePonyTo(currentPonyState.id);
-}
+};
