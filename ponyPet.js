@@ -22,7 +22,67 @@ function mouth() {
     currentPonyState.mouth();
     changePonyTo(currentPonyState.id);
 }
+
 window.onload = function () {
+	
+	function pnpoly( nvert, vertx, verty, testx, testy ) {
+    var i, j, c = false;
+    for( i = 0, j = nvert-1; i < nvert; j = i++ ) {
+        if( ( ( verty[i] > testy ) != ( verty[j] > testy ) ) &&
+            ( testx < ( vertx[j] - vertx[i] ) * ( testy - verty[i] ) / ( verty[j] - verty[i] ) + vertx[i] ) ) {
+                c = !c;
+        }
+    }
+    return c;
+}
+	
+	var vx = [50,150,150,50];
+	var vy = [50,50,150,150];
+	function FindPosition(oElement)
+{
+  if(typeof( oElement.offsetParent ) != "undefined")
+  {
+    for(var posX = 0, posY = 0; oElement; oElement = oElement.offsetParent)
+    {
+      posX += oElement.offsetLeft;
+      posY += oElement.offsetTop;
+    }
+      return [ posX, posY ];
+    }
+    else
+    {
+      return [ oElement.x, oElement.y ];
+    }
+}
+function GetCoordinates(e,myImg)
+{
+  var PosX = 0;
+  var PosY = 0;
+  var ImgPos;
+  ImgPos = FindPosition(myImg);
+  if (!e) var e = window.event;
+  if (e.pageX || e.pageY)
+  {
+    PosX = e.pageX;
+    PosY = e.pageY;
+  }
+  else if (e.clientX || e.clientY)
+    {
+      PosX = e.clientX + document.body.scrollLeft
+        + document.documentElement.scrollLeft;
+      PosY = e.clientY + document.body.scrollTop
+        + document.documentElement.scrollTop;
+    }
+  PosX = PosX - ImgPos[0];
+  PosY = PosY - ImgPos[1];
+  
+  if(pnpoly(4,vx,vy,PosX,PosY)) boop();
+  //alert(PosX +","+PosY+": "+pnpoly(4,vx,vy,PosX,PosY));
+}
+	function ponyPet_clicked(e){
+		
+		GetCoordinates(e,elem);
+	}
     function ponyStateFactory(id, pet, eye, boop, mouth) {
         return {
             id: id,
@@ -56,6 +116,8 @@ window.onload = function () {
     elem.setAttribute("width", "200");
     elem.setAttribute("alt", "Best Pony");
     elem.setAttribute("id", "ponyImg");
+	elem.onclick = ponyPet_clicked;
+	
 
     var canvas = document.getElementById('ponypetcanvas');
     canvas.appendChild(elem);
