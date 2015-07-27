@@ -35,10 +35,24 @@ window.onload = function () {
     }
     return c;
 }
+	var petPoly={
+		vx : [0,200,200,0],
+		vy : [0,0,50,50]
+	};
+	var eyesPoly={
+		vx : [0,200,200,0],
+		vy : [50,50,100,100]
+	};
+	var boopPoly={
+		vx : [0,200,200,0],
+		vy : [100,100,150,150]
+	};
+	var mouthPoly={
+		vx : [0,200,200,0],
+		vy : [150,150,200,200]
+	};
 	
-	var vx = [50,150,150,50];
-	var vy = [50,50,150,150];
-	function FindPosition(oElement)
+	function findPosition(oElement)
 {
   if(typeof( oElement.offsetParent ) != "undefined")
   {
@@ -54,35 +68,41 @@ window.onload = function () {
       return [ oElement.x, oElement.y ];
     }
 }
-function GetCoordinates(e,myImg)
+function getCoordinates(e,img)
 {
-  var PosX = 0;
-  var PosY = 0;
-  var ImgPos;
-  ImgPos = FindPosition(myImg);
+  var posX = 0;
+  var posY = 0;
+  var imgPos;
+  imgPos = findPosition(img);
   if (!e) var e = window.event;
   if (e.pageX || e.pageY)
   {
-    PosX = e.pageX;
-    PosY = e.pageY;
+    posX = e.pageX;
+    posY = e.pageY;
   }
   else if (e.clientX || e.clientY)
     {
-      PosX = e.clientX + document.body.scrollLeft
+      posX = e.clientX + document.body.scrollLeft
         + document.documentElement.scrollLeft;
-      PosY = e.clientY + document.body.scrollTop
+      posY = e.clientY + document.body.scrollTop
         + document.documentElement.scrollTop;
     }
-  PosX = PosX - ImgPos[0];
-  PosY = PosY - ImgPos[1];
+  posX = posX - imgPos[0];
+  posY = posY - imgPos[1];
   
-  if(pnpoly(4,vx,vy,PosX,PosY)) boop();
+  return {x: posX, y: posY};
+  //if(pnpoly(4,vx,vy,posX,posY)) boop();
   //alert(PosX +","+PosY+": "+pnpoly(4,vx,vy,PosX,PosY));
 }
 	function ponyPet_clicked(e){
-		
-		GetCoordinates(e,elem);
+		var coordinates = getCoordinates(e,elem);
+		if(pnpoly(petPoly.vx.length,petPoly.vx,petPoly.vy,coordinates.x,coordinates.y)) pet();
+		else if(pnpoly(eyesPoly.vx.length,eyesPoly.vx,eyesPoly.vy,coordinates.x,coordinates.y)) eye();
+		else if(pnpoly(boopPoly.vx.length,boopPoly.vx,boopPoly.vy,coordinates.x,coordinates.y)) boop();
+		else if(pnpoly(mouthPoly.vx.length,mouthPoly.vx,mouthPoly.vy,coordinates.x,coordinates.y)) mouth();
+		else alert(PosX +","+PosY+": "+pnpoly(4,vx,vy,PosX,PosY));
 	}
+	
     function ponyStateFactory(id, pet, eye, boop, mouth) {
         return {
             id: id,
