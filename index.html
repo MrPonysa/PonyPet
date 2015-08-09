@@ -1,15 +1,20 @@
 <html>
 <head>
-    <script src="ponyPet.js"></script>
+    <!-- Include a reference to ponyPet.js -->
+    <script src="ponyPet/ponyPet.js"></script>
 </head>
 <body>
 
+    <!-- This is the minimum HTML required -->
     <span data-ponypet></span>
-    <center>
-        <span data-ponypet data-ponypet-img-path="http://i.imgur.com"></span>
-        <span data-ponypet data-ponypet-width="300"></span>
-        <span data-ponypet data-ponypet-height="300"></span>
+    <div>
+        <!-- Use the data-ponypet-path attribute to navigate to the ponyPet folder -->
+        <span data-ponypet data-ponypet-path="ponyPet/../ponyPet"></span>
+        <span data-ponypet data-ponypet-path="http://i.imgur.com"></span>
+    </div>
+    <div>        
+        <!-- Use the data-ponypet-width and data-ponypet-height attributes to change the width and height -->
         <span data-ponypet data-ponypet-width="300" data-ponypet-height="300"></span>
-    </center>
-    <a href="http://imgur.com/5oOsAfs"><img src="http://i.imgur.com/5oOsAfs.gif" title="source: imgur.com" /></a>
+    </div>
+
 </body>

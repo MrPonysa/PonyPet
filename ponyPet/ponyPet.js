@@ -1,7 +1,10 @@
+//Source at https://github.com/MrOnosa/PonyPet
+//Idea from https://www.reddit.com/r/mylittlepony/comments/3dpgvo/i_made_a_handful_of_animated_expressions_for_lyra/
+
 window.onload = function () {
     //For debugging
     function log(msg) {
-        console.log(msg);
+        //console.log(msg);
     }
 
     function getElementsByAttribute(attribute) {
@@ -79,10 +82,9 @@ window.onload = function () {
             vx: [93, 106, 125, 122, 95, 85, 93],
             vy: [151, 150, 149, 167, 170, 157, 151]
         };
-        if (!pathToImgs) pathToImgs = "img";
+        if (!pathToImgs) pathToImgs = "ponyPet";
 
-        function scale(vectorArray, factor)
-        {
+        function scale(vectorArray, factor) {
             for (var i = 0; i < vectorArray.length; i++) {
                 vectorArray[i] = vectorArray[i] * factor;
             }
@@ -111,7 +113,7 @@ window.onload = function () {
         var ponyImg;
 
         function changePonyTo(id) {
-            ponyImg.setAttribute("src", pathToImgs+"/" + id + ".gif");
+            ponyImg.setAttribute("src", pathToImgs + "/" + id + ".gif");
         }
 
         function pet() {
@@ -187,7 +189,7 @@ window.onload = function () {
         currentPonyState = ponyStates[4];
 
         var elem = document.createElement("img");
-        elem.setAttribute("src", pathToImgs+"/1.gif");
+        elem.setAttribute("src", pathToImgs + "/1.gif");
         elem.setAttribute("height", height);
         elem.setAttribute("width", width);
         elem.setAttribute("alt", "Best Pony");
@@ -203,6 +205,6 @@ window.onload = function () {
     //Get every ponypet on the page and initialize them
     var ponyPets = getElementsByAttribute('data-ponypet');
     for (var ponyPetIndex = 0; ponyPetIndex < ponyPets.length; ponyPetIndex++) {
-        new ponyPet(ponyPets[ponyPetIndex], ponyPets[ponyPetIndex].getAttribute('data-ponypet-width'), ponyPets[ponyPetIndex].getAttribute('data-ponypet-height'), ponyPets[ponyPetIndex].getAttribute('data-ponypet-img-path'));
+        new ponyPet(ponyPets[ponyPetIndex], ponyPets[ponyPetIndex].getAttribute('data-ponypet-width'), ponyPets[ponyPetIndex].getAttribute('data-ponypet-height'), ponyPets[ponyPetIndex].getAttribute('data-ponypet-path'));
     }
 };
