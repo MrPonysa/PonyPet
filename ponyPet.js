@@ -62,24 +62,49 @@ window.onload = function () {
         return { x: posX, y: posY };
     }
 
-    var petPoly = {
-        vx: [75, 87, 186, 168, 178, 199, 133, 120, 111, 66, 38, 5, 13, 33, 56, 75],
-        vy: [171, 199, 200, 161, 119, 104, 2, 3, 30, 5, 73, 73, 116, 164, 155, 171]
-    };
-    var eyesPoly = {
-        vx: [57, 68, 82, 106, 113, 120, 135, 153, 139, 131, 118, 106, 107, 81, 89, 81, 67, 54, 51, 49, 59],
-        vy: [92, 94, 107, 105, 85, 79, 79, 105, 135, 141, 141, 128, 105, 107, 144, 150, 150, 136, 125, 103, 93]
-    };
-    var boopPoly = {
-        vx: [106, 107, 80, 88, 93, 106, 107, 106],
-        vy: [128, 105, 107, 143, 151, 150, 146, 128]
-    };
-    var mouthPoly = {
-        vx: [93, 106, 125, 122, 95, 85, 93],
-        vy: [151, 150, 149, 167, 170, 157, 151]
-    };
+    function ponyPet(canvas, width, height) {
+        var petPoly = {
+            vx: [75, 87, 186, 168, 178, 199, 133, 120, 111, 66, 38, 5, 13, 33, 56, 75],
+            vy: [171, 199, 200, 161, 119, 104, 2, 3, 30, 5, 73, 73, 116, 164, 155, 171]
+        };
+        var eyesPoly = {
+            vx: [57, 68, 82, 106, 113, 120, 135, 153, 139, 131, 118, 106, 107, 81, 89, 81, 67, 54, 51, 49, 59],
+            vy: [92, 94, 107, 105, 85, 79, 79, 105, 135, 141, 141, 128, 105, 107, 144, 150, 150, 136, 125, 103, 93]
+        };
+        var boopPoly = {
+            vx: [106, 107, 80, 88, 93, 106, 107, 106],
+            vy: [128, 105, 107, 143, 151, 150, 146, 128]
+        };
+        var mouthPoly = {
+            vx: [93, 106, 125, 122, 95, 85, 93],
+            vy: [151, 150, 149, 167, 170, 157, 151]
+        };
 
-    function ponyPet(canvas) {
+        function scale(vectorArray, factor)
+        {
+            for (var i = 0; i < vectorArray.length; i++) {
+                vectorArray[i] = vectorArray[i] * factor;
+            }
+        }
+        if (!width) {
+            width = 200;
+        }
+        else {
+            scale(petPoly.vx, width / 200);
+            scale(eyesPoly.vx, width / 200);
+            scale(boopPoly.vx, width / 200);
+            scale(mouthPoly.vx, width / 200);
+        }
+        if (!height) {
+            height = 200;
+        }
+        else {
+            scale(petPoly.vy, height / 200);
+            scale(eyesPoly.vy, height / 200);
+            scale(boopPoly.vy, height / 200);
+            scale(mouthPoly.vy, height / 200);
+        }
+
         var ponyStates = [];
         var currentPonyState;
         var ponyImg;
@@ -161,8 +186,8 @@ window.onload = function () {
 
         var elem = document.createElement("img");
         elem.setAttribute("src", "img/1.gif");
-        elem.setAttribute("height", "200");
-        elem.setAttribute("width", "200");
+        elem.setAttribute("height", height);
+        elem.setAttribute("width", width);
         elem.setAttribute("alt", "Best Pony");
         elem.setAttribute("id", "ponyImg");
         elem.onclick = ponyPet_clicked;
@@ -176,6 +201,6 @@ window.onload = function () {
     //Get every ponypet on the page and initialize them
     var ponyPets = getElementsByAttribute('data-ponypet');
     for (var ponyPetIndex = 0; ponyPetIndex < ponyPets.length; ponyPetIndex++) {
-        new ponyPet(ponyPets[ponyPetIndex]);
+        new ponyPet(ponyPets[ponyPetIndex], ponyPets[ponyPetIndex].getAttribute('data-ponypet-width'), ponyPets[ponyPetIndex].getAttribute('data-ponypet-height'));
     }
 };
