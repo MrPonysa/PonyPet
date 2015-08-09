@@ -62,7 +62,7 @@ window.onload = function () {
         return { x: posX, y: posY };
     }
 
-    function ponyPet(canvas, width, height) {
+    function ponyPet(canvas, width, height, pathToImgs) {
         var petPoly = {
             vx: [75, 87, 186, 168, 178, 199, 133, 120, 111, 66, 38, 5, 13, 33, 56, 75],
             vy: [171, 199, 200, 161, 119, 104, 2, 3, 30, 5, 73, 73, 116, 164, 155, 171]
@@ -79,6 +79,7 @@ window.onload = function () {
             vx: [93, 106, 125, 122, 95, 85, 93],
             vy: [151, 150, 149, 167, 170, 157, 151]
         };
+        if (!pathToImgs) pathToImgs = "img";
 
         function scale(vectorArray, factor)
         {
@@ -110,7 +111,7 @@ window.onload = function () {
         var ponyImg;
 
         function changePonyTo(id) {
-            ponyImg.setAttribute("src", "img/" + id + ".gif");
+            ponyImg.setAttribute("src", pathToImgs+"/" + id + ".gif");
         }
 
         function pet() {
@@ -167,25 +168,26 @@ window.onload = function () {
             };
         }
 
-        ponyStates.push(ponyStateFactory(1, 1, 6, 3, 13));
-        ponyStates.push(ponyStateFactory(2, 3, 10, 6, 10));
-        ponyStates.push(ponyStateFactory(3, 5, 11, 1, 9));
-        ponyStates.push(ponyStateFactory(4, 5, 8, 3, 12));
-        ponyStates.push(ponyStateFactory(5, 1, 11, 11, 13));
-        ponyStates.push(ponyStateFactory(6, 7, 10, 11, 14));
-        ponyStates.push(ponyStateFactory(7, 1, 10, 2, 14));
-        ponyStates.push(ponyStateFactory(8, 4, 10, 11, 4));
-        ponyStates.push(ponyStateFactory(9, 9, 11, 11, 1));
-        ponyStates.push(ponyStateFactory(10, 2, 2, 8, 3));
-        ponyStates.push(ponyStateFactory(11, 13, 13, 12, 3));
-        ponyStates.push(ponyStateFactory(12, 13, 11, 11, 5));
-        ponyStates.push(ponyStateFactory(13, 9, 10, 11, 5));
-        ponyStates.push(ponyStateFactory(14, 13, 10, 11, 6));
+        //Z45d91z,5oOsAfs,vBwfO1p,7pNN59O,HPLfk9L,fAePZwC,Cxg5XQ5,qesFj6X,ZPEYL7N,ctzJr62,RoiHGqz,IG1Flh4,8idYWSa,RiaPqRO
+        ponyStates.push(ponyStateFactory('Z45d91z', 1, 6, 3, 13));
+        ponyStates.push(ponyStateFactory('5oOsAfs', 3, 10, 6, 10));
+        ponyStates.push(ponyStateFactory('vBwfO1p', 5, 11, 1, 9));
+        ponyStates.push(ponyStateFactory('7pNN59O', 5, 8, 3, 12));
+        ponyStates.push(ponyStateFactory('HPLfk9L', 1, 11, 11, 13));
+        ponyStates.push(ponyStateFactory('fAePZwC', 7, 10, 11, 14));
+        ponyStates.push(ponyStateFactory('Cxg5XQ5', 1, 10, 2, 14));
+        ponyStates.push(ponyStateFactory('qesFj6X', 4, 10, 11, 4));
+        ponyStates.push(ponyStateFactory('ZPEYL7N', 9, 11, 11, 1));
+        ponyStates.push(ponyStateFactory('ctzJr62', 2, 2, 8, 3));
+        ponyStates.push(ponyStateFactory('RoiHGqz', 13, 13, 12, 3));
+        ponyStates.push(ponyStateFactory('IG1Flh4', 13, 11, 11, 5));
+        ponyStates.push(ponyStateFactory('8idYWSa', 9, 10, 11, 5));
+        ponyStates.push(ponyStateFactory('RiaPqRO', 13, 10, 11, 6));
 
         currentPonyState = ponyStates[4];
 
         var elem = document.createElement("img");
-        elem.setAttribute("src", "img/1.gif");
+        elem.setAttribute("src", pathToImgs+"/1.gif");
         elem.setAttribute("height", height);
         elem.setAttribute("width", width);
         elem.setAttribute("alt", "Best Pony");
@@ -201,6 +203,6 @@ window.onload = function () {
     //Get every ponypet on the page and initialize them
     var ponyPets = getElementsByAttribute('data-ponypet');
     for (var ponyPetIndex = 0; ponyPetIndex < ponyPets.length; ponyPetIndex++) {
-        new ponyPet(ponyPets[ponyPetIndex], ponyPets[ponyPetIndex].getAttribute('data-ponypet-width'), ponyPets[ponyPetIndex].getAttribute('data-ponypet-height'));
+        new ponyPet(ponyPets[ponyPetIndex], ponyPets[ponyPetIndex].getAttribute('data-ponypet-width'), ponyPets[ponyPetIndex].getAttribute('data-ponypet-height'), ponyPets[ponyPetIndex].getAttribute('data-ponypet-img-path'));
     }
 };
