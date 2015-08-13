@@ -44,24 +44,30 @@ window.onload = function () {
     }
 
     function getCoordinates(e, img) {
-        var posX = 0;
-        var posY = 0;
-        var imgPos;
-        imgPos = findPosition(img);
-        if (!e) var e = window.event;
-        if (e.pageX || e.pageY) {
-            posX = e.pageX;
-            posY = e.pageY;
+        if (!!window.jQuery) {
+            var posX = e.pageX - $(img).offset().left,
+            posY = e.pageY - $(img).offset().top;
         }
-        else if (e.clientX || e.clientY) {
-            posX = e.clientX + document.body.scrollLeft
-              + document.documentElement.scrollLeft;
-            posY = e.clientY + document.body.scrollTop
-              + document.documentElement.scrollTop;
-        }
-        posX = posX - imgPos[0];
-        posY = posY - imgPos[1];
+        else {
+            var posX = 0;
+            var posY = 0;
 
+            var imgPos;
+            imgPos = findPosition(img);
+            if (!e) var e = window.event;
+            if (e.pageX || e.pageY) {
+                posX = e.pageX;
+                posY = e.pageY;
+            }
+            else if (e.clientX || e.clientY) {
+                posX = e.clientX + document.body.scrollLeft
+                  + document.documentElement.scrollLeft;
+                posY = e.clientY + document.body.scrollTop
+                  + document.documentElement.scrollTop;
+            }
+            posX = posX - imgPos[0];
+            posY = posY - imgPos[1];
+        }
         return { x: posX, y: posY };
     }
 
@@ -203,7 +209,7 @@ window.onload = function () {
     };
 
     //Get every ponypet on the page and initialize them
-    var ponyPets = getElementsByAttribute('data-ponypet');
+    var ponyPets = !!window.jQuery ? $("span[data-ponypet]") : getElementsByAttribute('data-ponypet');
     for (var ponyPetIndex = 0; ponyPetIndex < ponyPets.length; ponyPetIndex++) {
         new ponyPet(ponyPets[ponyPetIndex], ponyPets[ponyPetIndex].getAttribute('data-ponypet-width'), ponyPets[ponyPetIndex].getAttribute('data-ponypet-height'), ponyPets[ponyPetIndex].getAttribute('data-ponypet-path'));
     }

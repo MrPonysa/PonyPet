@@ -1,20 +1,37 @@
 <html>
 <head>
-    <!-- Include a reference to ponyPet.js -->
+    <!--STEP 1: Include a reference to ponyPet.js -->
     <script src="ponyPet/ponyPet.js"></script>
+    <!-- While jQuery is not required, it is utilized if it is included and may fix some issues with clicking position. -->
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script> -->
+    <style>
+        pre {
+            background-color: lightgray;
+            display: inline-block;
+        }
+    </style>
 </head>
 <body>
-
-    <!-- This is the minimum HTML required -->
+    You will need to include <a href="ponyPet/ponyPet.js">this file</a> somewhere in your code.<br/>
+    <!--STEP 2: This is the minimum HTML required -->
     <span data-ponypet></span>
+    <br /><pre><code>&lt;script src="ponyPet/ponyPet.js"&gt;&lt;/script&gt;    
+&lt;span data-ponypet&gt;&lt;/span&gt;</code></pre>
+    <br/>
+    You can click on her eyes, nose, mouth, or anywhere else to change her state.
+    <hr />
     <div>
-        <!-- Use the data-ponypet-path attribute to navigate to the ponyPet folder -->
+        Use the <b>data-ponypet-path</b> attribute to navigate to the ponyPet folder.<br/>
         <span data-ponypet data-ponypet-path="ponyPet/../ponyPet"></span>
-        <span data-ponypet data-ponypet-path="http://i.imgur.com"></span>
+        <span data-ponypet data-ponypet-path="http://i.imgur.com"></span><br/>
+        <pre><code>&lt;span data-ponypet data-ponypet-path="ponyPet/../ponyPet"&gt;&lt;/span&gt;</code></pre>
+        <pre><code>&lt;span data-ponypet data-ponypet-path="http://i.imgur.com"&gt;&lt;/span&gt;</code></pre>
     </div>
-    <div>        
-        <!-- Use the data-ponypet-width and data-ponypet-height attributes to change the width and height -->
-        <span data-ponypet data-ponypet-width="300" data-ponypet-height="300"></span>
+    <hr />
+    <div>
+        Use the <b>data-ponypet-width</b> and <b>data-ponypet-height</b> attributes to change the width and height.<br/>
+        <span data-ponypet data-ponypet-width="300" data-ponypet-height="300"></span><br/>
+        <pre><code>&lt;span data-ponypet data-ponypet-width="300" data-ponypet-height="300"&gt;&lt;/span&gt;</code></pre>
     </div>
-
+    <!-- <marquee><span data-ponypet></span></marquee> Works when jQuery is referenced -->
 </body>
