@@ -4,7 +4,7 @@
 window.onload = function () {
     //For debugging
     function log(msg) {
-        //console.log(msg);
+        console.log(msg);
     }
 
     function getElementsByAttribute(attribute) {
@@ -71,7 +71,7 @@ window.onload = function () {
         return { x: posX, y: posY };
     }
 
-    function ponyPet(canvas, width, height, pathToImgs) {
+    function ponyPet(canvas, width, height, pathToImgs, timeoutMin, timeoutMax) {
         var petPoly = {
             vx: [75, 87, 186, 168, 178, 199, 133, 120, 111, 66, 38, 5, 13, 33, 56, 75],
             vy: [171, 199, 200, 161, 119, 104, 2, 3, 30, 5, 73, 73, 116, 164, 155, 171]
@@ -89,6 +89,11 @@ window.onload = function () {
             vy: [151, 150, 149, 167, 170, 157, 151]
         };
         if (!pathToImgs) pathToImgs = "ponyPet";
+        timeoutMin = parseInt(timeoutMin);
+        timeoutMax = parseInt(timeoutMax);
+        if (isNaN(timeoutMin) || timeoutMin < 0) timeoutMin = 5000;
+        if (isNaN(timeoutMax) || timeoutMax < 0) timeoutMax = 10000;
+        if (timeoutMin > timeoutMax) timeoutMin = timeoutMax;
 
         function scale(vectorArray, factor) {
             for (var i = 0; i < vectorArray.length; i++) {
@@ -117,9 +122,26 @@ window.onload = function () {
         var ponyStates = [];
         var currentPonyState;
         var ponyImg;
+        var technologicalSingularityTimeout;
 
         function changePonyTo(id) {
             ponyImg.setAttribute("src", pathToImgs + "/" + id + ".gif");
+
+            if (timeoutMax != 0) {
+                //Randomly pick another action in 5 to 10 seconds.
+                clearTimeout(technologicalSingularityTimeout);
+                technologicalSingularityTimeout = window.setTimeout(function () {
+                    var result = Math.random();
+                    if (result < 0.25)
+                        pet();
+                    else if (result < 0.5)
+                        eye();
+                    else if (result < 0.75)
+                        boop();
+                    else
+                        mouth();
+                }, (Math.random() * (timeoutMax - timeoutMin) + timeoutMin));
+            }
         }
 
         function pet() {
@@ -211,6 +233,6 @@ window.onload = function () {
     //Get every ponypet on the page and initialize them
     var ponyPets = !!window.jQuery ? $("span[data-ponypet]") : getElementsByAttribute('data-ponypet');
     for (var ponyPetIndex = 0; ponyPetIndex < ponyPets.length; ponyPetIndex++) {
-        new ponyPet(ponyPets[ponyPetIndex], ponyPets[ponyPetIndex].getAttribute('data-ponypet-width'), ponyPets[ponyPetIndex].getAttribute('data-ponypet-height'), ponyPets[ponyPetIndex].getAttribute('data-ponypet-path'));
+        new ponyPet(ponyPets[ponyPetIndex], ponyPets[ponyPetIndex].getAttribute('data-ponypet-width'), ponyPets[ponyPetIndex].getAttribute('data-ponypet-height'), ponyPets[ponyPetIndex].getAttribute('data-ponypet-path'), ponyPets[ponyPetIndex].getAttribute('data-ponypet-timeout-min'), ponyPets[ponyPetIndex].getAttribute('data-ponypet-timeout-max'));
     }
 };

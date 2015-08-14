@@ -12,26 +12,39 @@
     </style>
 </head>
 <body>
-    You will need to include <a href="ponyPet/ponyPet.js">this file</a> somewhere in your code.<br/>
+    <h1><a href="https://github.com/MrOnosa/PonyPet">PonyPet</a></h1><br /><br />
+    To get started, <a href="ponyPet/ponyPet.js">this file</a> will need to be referenced somewhere on the website.<br />
     <!--STEP 2: This is the minimum HTML required -->
     <span data-ponypet></span>
     <br /><pre><code>&lt;script src="ponyPet/ponyPet.js"&gt;&lt;/script&gt;    
 &lt;span data-ponypet&gt;&lt;/span&gt;</code></pre>
-    <br/>
+    <br />
     You can click on her eyes, nose, mouth, or anywhere else to change her state.
     <hr />
     <div>
-        Use the <b>data-ponypet-path</b> attribute to navigate to the ponyPet folder.<br/>
+        Use the <b>data-ponypet-path</b> attribute to navigate to the ponyPet folder where all the images are located.<br />
         <span data-ponypet data-ponypet-path="ponyPet/../ponyPet"></span>
-        <span data-ponypet data-ponypet-path="http://i.imgur.com"></span><br/>
+        <span data-ponypet data-ponypet-path="http://i.imgur.com"></span><br />
         <pre><code>&lt;span data-ponypet data-ponypet-path="ponyPet/../ponyPet"&gt;&lt;/span&gt;</code></pre>
         <pre><code>&lt;span data-ponypet data-ponypet-path="http://i.imgur.com"&gt;&lt;/span&gt;</code></pre>
     </div>
     <hr />
     <div>
-        Use the <b>data-ponypet-width</b> and <b>data-ponypet-height</b> attributes to change the width and height.<br/>
-        <span data-ponypet data-ponypet-width="300" data-ponypet-height="300"></span><br/>
+        Use the <b>data-ponypet-width</b> and <b>data-ponypet-height</b> attributes to change the width and height.<br />
+        <span data-ponypet data-ponypet-width="300" data-ponypet-height="300"></span><br />
         <pre><code>&lt;span data-ponypet data-ponypet-width="300" data-ponypet-height="300"&gt;&lt;/span&gt;</code></pre>
     </div>
+    <hr />
+    <div>
+        Use the <b>data-ponypet-timeout-min</b> and <b>data-ponypet-timeout-max</b> attributes to change the duration between automatically changing state.<br />
+        Set <b>data-ponypet-timeout-max</b> to <b>0</b> to disable this effect.<br />
+        <span data-ponypet data-ponypet-timeout-min="1000" data-ponypet-timeout-max="1500"></span>
+        <span data-ponypet data-ponypet-timeout-max="0"></span><br />
+        <pre><code>&lt;span data-ponypet data-ponypet-timeout-min="1000" data-ponypet-timeout-max="1500"&gt;&lt;/span&gt;</code></pre>
+        <pre><code>&lt;span data-ponypet data-ponypet-timeout-max="0"&gt;&lt;/span&gt;</code></pre>
+    </div>
+    <hr/>
+    Source code at <a href="https://github.com/MrOnosa/PonyPet">https://github.com/MrOnosa/PonyPet</a>
     <!-- <marquee><span data-ponypet></span></marquee> Works when jQuery is referenced -->
 </body>
+</html>
