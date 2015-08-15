@@ -1,7 +1,7 @@
 //Source at https://github.com/MrOnosa/PonyPet
 //Idea from https://www.reddit.com/r/mylittlepony/comments/3dpgvo/i_made_a_handful_of_animated_expressions_for_lyra/
 
-window.onload = function () {
+function ponyPet() {
     //For debugging
     function log(msg) {
         //console.log(msg);
@@ -71,7 +71,7 @@ window.onload = function () {
         return { x: posX, y: posY };
     }
 
-    function ponyPet(canvas, width, height, pathToImgs, timeoutMin, timeoutMax) {
+    function ponyPetInit(canvas, width, height, pathToImgs, timeoutMin, timeoutMax) {
         var petPoly = {
             vx: [75, 87, 186, 168, 178, 199, 133, 120, 111, 66, 38, 5, 13, 33, 56, 75],
             vy: [171, 199, 200, 161, 119, 104, 2, 3, 30, 5, 73, 73, 116, 164, 155, 171]
@@ -220,7 +220,6 @@ window.onload = function () {
         elem.setAttribute("height", height);
         elem.setAttribute("width", width);
         elem.setAttribute("alt", "Best Pony");
-        elem.setAttribute("id", "ponyImg");
         elem.onclick = ponyPet_clicked;
 
         canvas.appendChild(elem);
@@ -232,6 +231,8 @@ window.onload = function () {
     //Get every ponypet on the page and initialize them
     var ponyPets = !!window.jQuery ? $("span[data-ponypet]") : getElementsByAttribute('data-ponypet');
     for (var ponyPetIndex = 0; ponyPetIndex < ponyPets.length; ponyPetIndex++) {
-        new ponyPet(ponyPets[ponyPetIndex], ponyPets[ponyPetIndex].getAttribute('data-ponypet-width'), ponyPets[ponyPetIndex].getAttribute('data-ponypet-height'), ponyPets[ponyPetIndex].getAttribute('data-ponypet-path'), ponyPets[ponyPetIndex].getAttribute('data-ponypet-timeout-min'), ponyPets[ponyPetIndex].getAttribute('data-ponypet-timeout-max'));
+			new ponyPetInit(ponyPets[ponyPetIndex], ponyPets[ponyPetIndex].getAttribute('data-ponypet-width'), ponyPets[ponyPetIndex].getAttribute('data-ponypet-height'), ponyPets[ponyPetIndex].getAttribute('data-ponypet-path'), ponyPets[ponyPetIndex].getAttribute('data-ponypet-timeout-min'), ponyPets[ponyPetIndex].getAttribute('data-ponypet-timeout-max'));
     }
 };
+window.addEventListener('load', function(){ ponyPet()});
+
