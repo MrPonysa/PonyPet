@@ -4,7 +4,7 @@
 window.onload = function () {
     //For debugging
     function log(msg) {
-        console.log(msg);
+        //console.log(msg);
     }
 
     function getElementsByAttribute(attribute) {
@@ -198,7 +198,6 @@ window.onload = function () {
             };
         }
 
-        //Z45d91z,5oOsAfs,vBwfO1p,7pNN59O,HPLfk9L,fAePZwC,Cxg5XQ5,qesFj6X,ZPEYL7N,ctzJr62,RoiHGqz,IG1Flh4,8idYWSa,RiaPqRO
         ponyStates.push(ponyStateFactory('Z45d91z', 1, 6, 3, 13));
         ponyStates.push(ponyStateFactory('5oOsAfs', 3, 10, 6, 10));
         ponyStates.push(ponyStateFactory('vBwfO1p', 5, 11, 1, 9));
