@@ -1,7 +1,7 @@
 PonyPet
 ======
 
-##A Simple Interactive Pony library. 
+## A Simple Interactive Pony library. 
 
 Use this library to create a pony that you can pet, poke her eyes, boop her snout, and tap her muzzle. 
 

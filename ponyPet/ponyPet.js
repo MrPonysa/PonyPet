@@ -71,7 +71,7 @@ function ponyPet() {
         return { x: posX, y: posY };
     }
 
-    function ponyPetInit(canvas, width, height, pathToImgs, timeoutMin, timeoutMax) {
+    function ponyPetInit(canvas, width, height, pathToImgs, timeoutMin, timeoutMax, trixie) {
         var petPoly = {
             vx: [75, 87, 186, 168, 178, 199, 133, 120, 111, 66, 38, 5, 13, 33, 56, 75],
             vy: [171, 199, 200, 161, 119, 104, 2, 3, 30, 5, 73, 73, 116, 164, 155, 171]
@@ -125,7 +125,11 @@ function ponyPet() {
         var technologicalSingularityTimeout;
 
         function changePonyTo(id) {
-            ponyImg.setAttribute("src", pathToImgs + "/" + id + ".gif");
+            var src = "";
+            if(!trixie){ src = pathToImgs + "/"}
+            src += id;
+            if(id.indexOf('.')===-1) {src += ".gif";}
+            ponyImg.setAttribute("src", src);
 
             if (timeoutMax != 0) {
                 //Randomly pick another action in 5 to 10 seconds.
@@ -198,20 +202,36 @@ function ponyPet() {
             };
         }
 
-        ponyStates.push(ponyStateFactory('Z45d91z', 1, 6, 3, 13));
-        ponyStates.push(ponyStateFactory('5oOsAfs', 3, 10, 6, 10));
-        ponyStates.push(ponyStateFactory('vBwfO1p', 5, 11, 1, 9));
-        ponyStates.push(ponyStateFactory('7pNN59O', 5, 8, 3, 12));
-        ponyStates.push(ponyStateFactory('HPLfk9L', 1, 11, 11, 13));
-        ponyStates.push(ponyStateFactory('fAePZwC', 7, 10, 11, 14));
-        ponyStates.push(ponyStateFactory('Cxg5XQ5', 1, 10, 2, 14));
-        ponyStates.push(ponyStateFactory('qesFj6X', 4, 10, 11, 4));
-        ponyStates.push(ponyStateFactory('ZPEYL7N', 9, 11, 11, 1));
-        ponyStates.push(ponyStateFactory('ctzJr62', 2, 2, 8, 3));
-        ponyStates.push(ponyStateFactory('RoiHGqz', 13, 13, 12, 3));
-        ponyStates.push(ponyStateFactory('IG1Flh4', 13, 11, 11, 5));
-        ponyStates.push(ponyStateFactory('8idYWSa', 9, 10, 11, 5));
-        ponyStates.push(ponyStateFactory('RiaPqRO', 13, 10, 11, 6));
+        if(trixie)
+        {
+            ponyStates.push(ponyStateFactory('https://derpicdn.net/img/view/2017/4/17/1413699.gif', 2, 3, 4, 5));
+            ponyStates.push(ponyStateFactory('https://derpicdn.net/img/view/2017/4/16/1413531.gif', 3, 4, 5, 6));
+            ponyStates.push(ponyStateFactory('https://derpicdn.net/img/view/2017/2/10/1359082.png', 4, 5, 6, 7));
+            ponyStates.push(ponyStateFactory('https://derpicdn.net/img/view/2016/12/24/1324452.gif', 5, 6, 7, 8));
+            ponyStates.push(ponyStateFactory('https://derpicdn.net/img/view/2016/10/22/1279269.jpeg', 6, 7, 8, 9));
+            ponyStates.push(ponyStateFactory('https://derpicdn.net/img/view/2016/5/18/1156721.gif', 7, 8, 9, 10));
+            ponyStates.push(ponyStateFactory('https://derpicdn.net/img/view/2016/2/20/1092588.gif', 8, 9, 10, 1));
+            ponyStates.push(ponyStateFactory('https://derpicdn.net/img/view/2016/1/2/1057924.gif', 9, 10, 1, 2));
+            ponyStates.push(ponyStateFactory('https://derpicdn.net/img/view/2015/10/24/1008666.gif', 10, 1, 2, 3));
+            ponyStates.push(ponyStateFactory('https://derpicdn.net/img/view/2015/10/22/1007292.gif', 1, 2, 3, 4));   
+        }
+        else
+        {
+            ponyStates.push(ponyStateFactory('Z45d91z', 1, 6, 3, 13));
+            ponyStates.push(ponyStateFactory('5oOsAfs', 3, 10, 6, 10));
+            ponyStates.push(ponyStateFactory('vBwfO1p', 5, 11, 1, 9));
+            ponyStates.push(ponyStateFactory('7pNN59O', 5, 8, 3, 12));
+            ponyStates.push(ponyStateFactory('HPLfk9L', 1, 11, 11, 13));
+            ponyStates.push(ponyStateFactory('fAePZwC', 7, 10, 11, 14));
+            ponyStates.push(ponyStateFactory('Cxg5XQ5', 1, 10, 2, 14));
+            ponyStates.push(ponyStateFactory('qesFj6X', 4, 10, 11, 4));
+            ponyStates.push(ponyStateFactory('ZPEYL7N', 9, 11, 11, 1));
+            ponyStates.push(ponyStateFactory('ctzJr62', 2, 2, 8, 3));
+            ponyStates.push(ponyStateFactory('RoiHGqz', 13, 13, 12, 3));
+            ponyStates.push(ponyStateFactory('IG1Flh4', 13, 11, 11, 5));
+            ponyStates.push(ponyStateFactory('8idYWSa', 9, 10, 11, 5));
+            ponyStates.push(ponyStateFactory('RiaPqRO', 13, 10, 11, 6));
+        }
 
         currentPonyState = ponyStates[4];
 
@@ -231,7 +251,7 @@ function ponyPet() {
     //Get every ponypet on the page and initialize them
     var ponyPets = !!window.jQuery ? $("span[data-ponypet]") : getElementsByAttribute('data-ponypet');
     for (var ponyPetIndex = 0; ponyPetIndex < ponyPets.length; ponyPetIndex++) {
-			new ponyPetInit(ponyPets[ponyPetIndex], ponyPets[ponyPetIndex].getAttribute('data-ponypet-width'), ponyPets[ponyPetIndex].getAttribute('data-ponypet-height'), ponyPets[ponyPetIndex].getAttribute('data-ponypet-path'), ponyPets[ponyPetIndex].getAttribute('data-ponypet-timeout-min'), ponyPets[ponyPetIndex].getAttribute('data-ponypet-timeout-max'));
+			new ponyPetInit(ponyPets[ponyPetIndex], ponyPets[ponyPetIndex].getAttribute('data-ponypet-width'), ponyPets[ponyPetIndex].getAttribute('data-ponypet-height'), ponyPets[ponyPetIndex].getAttribute('data-ponypet-path'), ponyPets[ponyPetIndex].getAttribute('data-ponypet-timeout-min'), ponyPets[ponyPetIndex].getAttribute('data-ponypet-timeout-max'), ponyPets[ponyPetIndex].getAttribute('data-trixie'));
     }
 };
 window.addEventListener('load', function(){ ponyPet()});
