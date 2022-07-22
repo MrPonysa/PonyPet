@@ -5,7 +5,7 @@ PonyPet
 
 Use this library to create a pony that you can pet, poke her eyes, boop her snout, and tap her muzzle. 
 
-[Demo](https://cdn.rawgit.com/MrOnosa/PonyPet/master/index.html)
+[Demo](https://mronosa.github.io/ponyPetExample/index.html)
 
 To use, you'll need to add the ponyPet folder to your website, then add the following HTML:
 
